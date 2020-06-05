@@ -1,0 +1,65 @@
+PreSelection:
+  cuts:
+    - $FETCH_EVENTINFO : [kEventinfo]
+    - $FETCH_TRUTHEVENT : [kTruthEvent]
+    - $FETCH_TRUTH_PARTICLES : [TruthElectrons, kElectrons]
+    - $FETCH_TRUTH_PARTICLES : [TruthMuons, kMuons]
+    - $FETCH_TRUTH_PARTICLES : [TruthTaus, kTausH]
+    - $FETCH_TRUTH_PARTICLES : [TruthParticles, kHiggs]
+    - $FETCH_JETS: [AntiKt4TruthDressedWZJets, kJets]
+    - $FETCH_JETS: [AntiKt4TruthDressedWZJets, kVBFJets]
+
+    - $PID_SEL : [kHiggs, 25]
+
+    - $ELE_SEL : [kElectrons, -1, -1]
+    - $MUON_SEL : [kMuons, -1, -1]
+    - $TAU_SEL : [kTausH, -1, -1]
+
+#    - $ELE_SEL : [kElectrons, 7., 3.0]
+#    - $MUON_SEL : [kMuons, 7., 3.0]
+#    - $TAU_SEL : [kTausH, 15., 3.0]
+
+#    - $ELE_SEL : [kElectrons, 7., 2.47]
+#    - $MUON_SEL : [kMuons, 7., 2.5]
+#    - $TAU_SEL : [kTausH, 15., 2.5]
+
+#    - TRANREGION_CUT : [kElectrons]
+#    - TRANREGION_CUT : [kTausH]
+
+#    - $SIM_EFF : [kElectrons, 0.75]
+#    - $SIM_EFF : [kMuons, 0.75]
+#    - $SIM_EFF : [kTausH, 0.5]
+
+    - $ISOLEP_SEL: [kMuons]
+    - $ISOLEP_SEL: [kElectrons]
+    - $ISOLEP_SEL: [kTausH]
+
+#    - $JET_SEL : [kJets, 25, 4.5]
+#    - $JET_SEL : [kVBFJets, 25, 4.5]
+    - $VBF_JET_SEL : [kVBFJets, kVBFJets]
+
+    - $MERGE_CONTAINERS : ["kElectrons kMuons kTausH", kLeptons]
+    - APPLYMCWEIGHT : [kTruthEvent, name=ALLMC]
+    - HIGGS_DECAY_MODE_CUT : [kHiggs, name=higgs]
+  trees:
+    - all
+
+ZeroLepton:
+  cuts:
+    - N_EQUAL : [kLeptons, 0, "ZeroLepton"]
+
+OneLepton:
+  cuts:
+    - N_EQUAL : [kLeptons, 1, "OneLepton"]
+
+TwoLepton:
+  cuts:
+    - N_EQUAL : [kLeptons, 2, "TwoLepton"]
+
+ThreeLepton:
+  cuts:
+    - N_EQUAL : [kLeptons, 3, "ThreeLepton"]
+
+FourLepton:
+  cuts:
+    - N_MIN : [kLeptons, 4, "FourLepton"]
