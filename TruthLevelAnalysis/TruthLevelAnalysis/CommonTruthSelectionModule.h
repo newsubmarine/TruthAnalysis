@@ -19,6 +19,7 @@ class CommonTruthSelectionModule : public Module
   void fetchTruthParticles(std::string truth_key, std::string store_key);
   void fetchJets(std::string key, std::string store_key);
   bool vbfJetSel(xAOD::Jet* jet, std::string store_key);
+  bool bJetSel(xAOD::Jet* jet, int id);
   void fetchMET(std::string key, std::string store_key, std::string term_key);
   void fetchEventInfo(const std::string& eventinfo_key);
   void fetchTruthEvent(std::string key);
@@ -31,12 +32,15 @@ class CommonTruthSelectionModule : public Module
   double nLepWithin(const std::string& container_key1,const std::string& container_key2, int low, int high);
   double nMin(const std::string& key, int quantity);
   double higgsDecayModeCut(const std::string& key);
+  double zDecayModeCut(const std::string& key);
   double decayModeCut(const std::string& store_key, int n_TauH, int n_TauL);
   bool pidSel(xAOD::TruthParticle* higgs, int absPdgId);
   bool isoLepSel(xAOD::TruthParticle* par);
+  bool lepSel(xAOD::TruthParticle* lep, int parent_id);
   bool tauSel(xAOD::TruthParticle* tau, double pTcut, double etacut);
   bool eleSel(xAOD::TruthParticle* electron, double pTcut, double etacut);
   bool muonSel(xAOD::TruthParticle* muon, double pTcut, double etacut);
+  bool bQuarkSel(xAOD::TruthParticle* b_quark);
   bool simEff(xAOD::TruthParticle* par, double prob);
   double minPt(std::string container, int position, double minPt);
   double minTauPt(std::string container, int position, double minPt);

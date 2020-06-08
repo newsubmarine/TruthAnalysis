@@ -170,6 +170,86 @@ void TruthOutputModule::initialize (){
   // phi
   auto f_vbfJetPhi = core()->ApplyToElements(&xAOD::Jet::phi, &CycleBase::getContainer<xAOD::Jet>, "kVBFJets");
   core()->AddTreeBranch("vbfJetPhi", f_vbfJetPhi, "all");
+
+
+  // b quark kinematics
+  // mass
+  std::function<float()> f_bQuarksMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksMass", f_bQuarksMass, "all");
+  // pt
+  std::function<float()> f_bQuarksPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksPt", f_bQuarksPt, "all");
+  // eta
+  std::function<float()> f_bQuarksEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksEta", f_bQuarksEta, "all");
+  // phi
+  std::function<float()> f_bQuarksPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksPhi", f_bQuarksPhi, "all");
+  // deltaR
+  std::function<float()> f_bQuarksDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksDeltaR", f_bQuarksDeltaR, "all");
+  // deltaEta
+  std::function<float()> f_bQuarksDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksDeltaEta", f_bQuarksDeltaEta, "all");
+  // deltaPhi
+  std::function<float()> f_bQuarksDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarksDeltaPhi", f_bQuarksDeltaPhi, "all");
+
+  // pt
+  std::function<std::vector<float>()> f_bQuarkPt = std::bind(&TruthOutputModule::getPtVectorBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarkPt", f_bQuarkPt, "all");
+  // eta
+  std::function<std::vector<float>()> f_bQuarkEta = std::bind(&TruthOutputModule::getEtaVectorBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarkEta", f_bQuarkEta, "all");
+  // phi
+  std::function<std::vector<float>()> f_bQuarkPhi = std::bind(&TruthOutputModule::getPhiVectorBQuarks, this, "kHiggs", "bquarks");
+  core()->AddTreeBranch("bQuarkPhi", f_bQuarkPhi, "all");
+
+  // Z1 leptons kinematics
+  // mass
+  std::function<float()> f_Z1LeptonsMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsMass", f_Z1LeptonsMass, "all");
+  // pt
+  std::function<float()> f_Z1LeptonsPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsPt", f_Z1LeptonsPt, "all");
+  // eta
+  std::function<float()> f_Z1LeptonsEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsEta", f_Z1LeptonsEta, "all");
+  // phi
+  std::function<float()> f_Z1LeptonsPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsPhi", f_Z1LeptonsPhi, "all");
+  // deltaR
+  std::function<float()> f_Z1LeptonsDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsDeltaR", f_Z1LeptonsDeltaR, "all");
+  // deltaEta
+  std::function<float()> f_Z1LeptonsDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsDeltaEta", f_Z1LeptonsDeltaEta, "all");
+  // deltaPhi
+  std::function<float()> f_Z1LeptonsDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "leptons_Z1");
+  core()->AddTreeBranch("Z1LeptonsDeltaPhi", f_Z1LeptonsDeltaPhi, "all");
+
+  // Z2 leptons kinematics
+  // mass
+  std::function<float()> f_Z2LeptonsMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsMass", f_Z2LeptonsMass, "all");
+  // pt
+  std::function<float()> f_Z2LeptonsPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsPt", f_Z2LeptonsPt, "all");
+  // eta
+  std::function<float()> f_Z2LeptonsEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsEta", f_Z2LeptonsEta, "all");
+  // phi
+  std::function<float()> f_Z2LeptonsPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsPhi", f_Z2LeptonsPhi, "all");
+  // deltaR
+  std::function<float()> f_Z2LeptonsDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsDeltaR", f_Z2LeptonsDeltaR, "all");
+  // deltaEta
+  std::function<float()> f_Z2LeptonsDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsDeltaEta", f_Z2LeptonsDeltaEta, "all");
+  // deltaPhi
+  std::function<float()> f_Z2LeptonsDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "leptons_Z2");
+  core()->AddTreeBranch("Z2LeptonsDeltaPhi", f_Z2LeptonsDeltaPhi, "all");
 }
 
 
@@ -203,6 +283,18 @@ std::vector<TLorentzVector> TruthOutputModule::getP4(std::string key)
   return result;
 }
 
+std::vector<TLorentzVector> TruthOutputModule::getP4(std::vector<const xAOD::TruthParticle*> pars)
+{
+  std::vector<TLorentzVector> result;
+  result.clear();
+
+  for(auto par : pars){
+    result.push_back(par->p4());
+  }
+
+  return result;
+}
+
 
 float TruthOutputModule::getMass(std::string key)
 {
@@ -212,6 +304,7 @@ float TruthOutputModule::getMass(std::string key)
 
   return totalP4.M();
 }
+
 
 float TruthOutputModule::getPt(std::string key)
 {
@@ -264,6 +357,73 @@ float TruthOutputModule::getDeltaEta(std::string key)
   return (parP4[0].Eta() - parP4[1].Eta());
 }
 
+float TruthOutputModule::getMassBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+  TLorentzVector totalP4 = parP4[0]+parP4[1];
+
+  return totalP4.M();
+}
+
+float TruthOutputModule::getPtBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+  TLorentzVector totalP4 = parP4[0]+parP4[1];
+  
+  return totalP4.Pt();
+}
+
+float TruthOutputModule::getEtaBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+  TLorentzVector totalP4 = parP4[0]+parP4[1];
+  
+  return totalP4.Eta();
+}
+
+float TruthOutputModule::getPhiBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+  TLorentzVector totalP4 = parP4[0]+parP4[1];
+  
+  return totalP4.Phi();
+}
+
+float TruthOutputModule::getDeltaRBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+
+  return parP4[0].DeltaR(parP4[1]);
+}
+
+float TruthOutputModule::getDeltaPhiBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+
+  return parP4[0].DeltaPhi(parP4[1]);
+}
+
+float TruthOutputModule::getDeltaEtaBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4 = this->getP4(pars);
+  if (parP4.size() < 2)  return -999;
+
+  return (parP4[0].Eta() - parP4[1].Eta());
+}
+
 std::vector<float> TruthOutputModule::getPtVector(std::string key)
 {
   std::vector<TLorentzVector> parP4s = this->getP4(key);
@@ -291,6 +451,45 @@ std::vector<float> TruthOutputModule::getEtaVector(std::string key)
 std::vector<float> TruthOutputModule::getPhiVector(std::string key)
 {
   std::vector<TLorentzVector> parP4s = this->getP4(key);
+  std::vector<float> result;
+  result.clear();
+
+  for (auto parP4 : parP4s) {
+    result.push_back(parP4.Phi());
+  }
+  return result;
+}
+
+std::vector<float> TruthOutputModule::getPtVectorBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4s = this->getP4(pars);
+  std::vector<float> result;
+  result.clear();
+
+  for (auto parP4 : parP4s) {
+    result.push_back(parP4.Pt());
+  }
+  return result;
+}
+
+std::vector<float> TruthOutputModule::getEtaVectorBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4s = this->getP4(pars);
+  std::vector<float> result;
+  result.clear();
+
+  for (auto parP4 : parP4s) {
+    result.push_back(parP4.Eta());
+  }
+  return result;
+}
+
+std::vector<float> TruthOutputModule::getPhiVectorBQuarks(std::string key, std::string target)
+{
+  auto pars = this->getBQuarks(key, target);
+  std::vector<TLorentzVector> parP4s = this->getP4(pars);
   std::vector<float> result;
   result.clear();
 
@@ -344,4 +543,63 @@ std::vector<int> TruthOutputModule::getHiggsMode(const std::string & key){
     decaymode.push_back(child0_pdg);
   }
   return decaymode;  
+}
+
+std::vector<const xAOD::TruthParticle*> TruthOutputModule::getBQuarks(const std::string & key, const std::string & target){
+  std::vector<const xAOD::TruthParticle*> bottoms;
+  bottoms.clear();
+  auto pars = core()->getContainer<xAOD::TruthParticle>(key);
+
+  if(target == "bquarks"){
+    for(auto par : *pars){
+      if(par->pdgId() != 25) continue;
+      for(int i = 0; i < par->nChildren(); i++){
+        int id = par->child(i)->absPdgId();
+        if(id == 5){
+          bottoms.push_back(this->loopSelf(par->child(i)));
+        }
+      }
+    }
+  }
+
+  if(target == "leptons_Z1"){
+    int Z_index = 0;
+    std::cout<<__LINE__<<std::endl;
+    for(auto par : *pars){
+      if(par->pdgId() != 23) continue;
+      Z_index++;
+      std::cout<<"Z_index: "<<Z_index<<std::endl;
+      for(int i = 0; i < par->nChildren(); i++){
+        int id = par->child(i)->absPdgId();
+      std::cout<<"Z i th, child: "<<i<<", "<<id<<std::endl;
+        if(id == 11 || id == 13 || id == 15){
+          bottoms.push_back(this->loopSelf(par->child(i)));
+        }
+      }
+      if(Z_index == 1) break;
+    }
+  }
+
+  if(target == "leptons_Z2"){
+    int Z_index = 0;
+    for(auto par : *pars){
+      if(par->pdgId() != 23) continue;
+      Z_index++;
+      if(Z_index != 2) continue;
+      for(int i = 0; i < par->nChildren(); i++){
+        int id = par->child(i)->absPdgId();
+        if(id == 11 || id == 13 || id == 15){
+          bottoms.push_back(this->loopSelf(par->child(i)));
+        }
+      }
+      if(Z_index == 2) break;
+    }
+  }
+
+  return bottoms;
+}
+
+const xAOD::TruthParticle* TruthOutputModule::loopSelf(const xAOD::TruthParticle* par){
+  while(par->child(0) && par->pdgId() == par->child(0)->pdgId()) { par = par->child(0); }
+  return par;
 }

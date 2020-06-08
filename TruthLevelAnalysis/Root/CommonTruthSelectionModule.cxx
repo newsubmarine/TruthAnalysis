@@ -30,9 +30,11 @@ void CommonTruthSelectionModule::initialize (){
   core()->addTemplate("N_LEP_WITHIN", &CommonTruthSelectionModule::nLepWithin, this);
   core()->addTemplate("DECAY_MODE_CUT", &CommonTruthSelectionModule::decayModeCut, this);
   core()->addTemplate("HIGGS_DECAY_MODE_CUT", &CommonTruthSelectionModule::higgsDecayModeCut, this);
+  core()->addTemplate("Z_DECAY_MODE_CUT", &CommonTruthSelectionModule::zDecayModeCut, this);
   core()->addTemplate("PID_SEL", &CommonTruthSelectionModule::pidSel, this);
   core()->addTemplate("SIM_EFF", &CommonTruthSelectionModule::simEff, this);
   core()->addTemplate("ISOLEP_SEL", &CommonTruthSelectionModule::isoLepSel, this);
+//  core()->addTemplate("BQuark_SEL", &CommonTruthSelectionModule::bQuarkSel, this);
   core()->addTemplate("TAU_SEL", &CommonTruthSelectionModule::tauSel, this);
   core()->addTemplate("ELE_SEL", &CommonTruthSelectionModule::eleSel, this);
   core()->addTemplate("MUON_SEL", &CommonTruthSelectionModule::muonSel, this);
@@ -42,6 +44,7 @@ void CommonTruthSelectionModule::initialize (){
   core()->addTemplate("NOTHING", &CommonTruthSelectionModule::doNothing, this);
   core()->addTemplate("JET_SEL", &CommonTruthSelectionModule::jetSel, this);
   core()->addTemplate("VBF_JET_SEL", &CommonTruthSelectionModule::vbfJetSel, this);
+  core()->addTemplate("B_JET_SEL", &CommonTruthSelectionModule::bJetSel, this);
   core()->addTemplate("CALC_BWEIGHT", &CommonTruthSelectionModule::calcBweight, this);
   core()->addTemplate("TRANREGION_CUT", &CommonTruthSelectionModule::tranRegionCut, this);
 
@@ -145,6 +148,15 @@ bool CommonTruthSelectionModule :: vbfJetSel(xAOD::Jet* jet, std::string store_k
   else {
     return false;
   }
+}
+
+//_____________________________________________________________________________
+
+bool CommonTruthSelectionModule :: bJetSel(xAOD::Jet* jet, int id) {
+  if(! jet->isAvailable<int>("PartonTruthLabelID")) throw Exception("PartonTruthLabelID not decorated");
+  int parton_id = jet->auxdata<int>("PartonTruthLabelID");std::cout<<"jet parton id : "<<parton_id<<std::endl;
+  if(id != parton_id) return false;
+  else return true;
 }
 
 //_____________________________________________________________________________
@@ -357,8 +369,8 @@ bool CommonTruthSelectionModule::pidSel(xAOD::TruthParticle* par, int absPdgId)
   if (0==par->nChildren()) return true;
   for (unsigned int i=0; i<par->nChildren(); ++i) {
     int childPdgId = par->child(i)->absPdgId();
-    if (absPdgId==childPdgId) return false;
-    if (15==absPdgId && (11==childPdgId||13==childPdgId)) return false;
+    if (absPdgId==childPdgId) return false; // loop self chain
+    if (15==absPdgId && (11==childPdgId||13==childPdgId)) return false; // if pidSel(tau), exclude leptonic tau
   }
   return true;
 }
@@ -375,8 +387,10 @@ double CommonTruthSelectionModule::higgsDecayModeCut(const std::string& key)
     
     int child0_pdg = par->child(0)->absPdgId();
     int child1_pdg = par->child(1)->absPdgId();
+
+    std::cout<<"child id of Higgs: "<<child0_pdg<<std::endl;
 	
-    if (child0_pdg!=child1_pdg||(15!=child0_pdg&&23!=child0_pdg&&24!=child0_pdg)) 
+    if (child0_pdg!=child1_pdg||(23!=child0_pdg&&5!=child0_pdg)) 
     {
 	//std::cout << "Higgs not wanted..." << std::endl;
 	//print(key);	
@@ -385,6 +399,34 @@ double CommonTruthSelectionModule::higgsDecayModeCut(const std::string& key)
   }
   return 1.0;
 }
+
+//_____________________________________________________________________________
+
+double CommonTruthSelectionModule::zDecayModeCut(const std::string& key)
+{
+  auto pars = core()->getContainer<xAOD::TruthParticle>(key);
+  for (auto par : *pars) 
+  {
+    if (23!=par->pdgId()) continue;
+    if (0==par->nChildren()) continue;
+    if (23==par->child(0)->pdgId())  continue;
+    
+    int child0_pdg = par->child(0)->absPdgId();
+    int child1_pdg = par->child(1)->absPdgId();
+
+    std::cout<<"child id of Z: "<<child0_pdg<<std::endl;
+	
+    if (child0_pdg!=child1_pdg||(11!=child0_pdg&&13!=child0_pdg&&15!=child0_pdg)) 
+    {
+	//std::cout << "Z not wanted..." << std::endl;
+	//print(key);	
+	return 0.0;
+    }
+  }
+  return 1.0;
+}
+
+//_____________________________________________________________________________
 
 bool CommonTruthSelectionModule::simEff(xAOD::TruthParticle* par, double prob){
   if (15==par->absPdgId()) { 
@@ -431,6 +473,25 @@ const xAOD::TruthParticle* CommonTruthSelectionModule::getMother(const xAOD::Tru
 }
 //_____________________________________________________________________________
 
+bool CommonTruthSelectionModule::lepSel(xAOD::TruthParticle* lep, int parent_id){ // lep parent not available
+  if(lep->child(0) &&  lep->child(0)->pdgId() == lep->pdgId()) return false;
+  std::cout<<"lep id: "<<lep->pdgId()<<std::endl;
+  if(!lep->parent(0)) std::cout<<"lep parent not available"<<std::endl;
+  const xAOD::TruthParticle* par = lep;
+  while(par->pdgId() == par->parent(0)->pdgId()) { par = par->parent(0); }
+  std::cout<<"lep parent: "<<par->parent(0)->pdgId()<<std::endl;
+  if(par->parent(0)->pdgId() != parent_id && par->parent(0)->absPdgId() != 15) return false;
+  if(par->parent(0)->absPdgId() == 15){
+    const xAOD::TruthParticle* tau = par->parent(0);
+    while(tau->pdgId() == tau->parent(0)->pdgId()) { tau = tau->parent(0); }
+    if(tau->parent(0)->pdgId() != parent_id) return false;
+    std::cout<<"leptonic tau from Z"<<std::endl;
+  }
+  return true;
+}
+
+//_____________________________________________________________________________
+
 bool CommonTruthSelectionModule::tauSel(xAOD::TruthParticle* tau, double pTcut, double etacut){
   if(! tau->isAvailable<char>("IsHadronicTau")) throw Exception("tau not decorated"); 
   if(! tau->auxdata<char>("IsHadronicTau")) return false;
@@ -470,6 +531,22 @@ bool CommonTruthSelectionModule::muonSel(xAOD::TruthParticle* muon, double pTcut
   double absEta = std::abs(muon->eta());
   if(pt < pTcut * 1000. && pTcut >0) return false;
   if(absEta > etacut && etacut >0) return false;
+  return true;
+}
+
+//_____________________________________________________________________________
+
+bool CommonTruthSelectionModule::bQuarkSel(xAOD::TruthParticle* b_quark){
+  std::cout<<__LINE__<<std::endl;
+  if(b_quark->absPdgId() != 5) return false;
+  std::cout<<__LINE__<<std::endl;
+  if(b_quark->child(0)->pdgId() == b_quark->pdgId()) return false;
+  std::cout<<__LINE__<<std::endl;
+  if(! b_quark->parent(0)) throw Exception("can not fetch b parent");
+  //if(! b_quark->parent(0)) std::cout<<"can not fetch b parent"<<std::endl;
+  const xAOD::TruthParticle* par = b_quark;
+  while(par->parent(0)->pdgId()==par->pdgId()) {par=par->parent(0);}
+  if(par->parent(0)->pdgId() != 23) return false;
   return true;
 }
 
