@@ -416,7 +416,7 @@ double CommonTruthSelectionModule::zDecayModeCut(const std::string& key)
 
     std::cout<<"child id of Z: "<<child0_pdg<<std::endl;
 	
-    if (child0_pdg!=child1_pdg||(11!=child0_pdg&&13!=child0_pdg&&15!=child0_pdg)) 
+    if (child0_pdg!=child1_pdg||(11!=child0_pdg&&13!=child0_pdg&&15!=child0_pdg&&5<child0_pdg)) 
     {
 	//std::cout << "Z not wanted..." << std::endl;
 	//print(key);	

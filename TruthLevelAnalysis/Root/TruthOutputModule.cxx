@@ -205,51 +205,61 @@ void TruthOutputModule::initialize (){
   std::function<std::vector<float>()> f_bQuarkPhi = std::bind(&TruthOutputModule::getPhiVectorBQuarks, this, "kHiggs", "bquarks");
   core()->AddTreeBranch("bQuarkPhi", f_bQuarkPhi, "all");
 
-  // Z1 leptons kinematics
+  // Z leptons kinematics
   // mass
-  std::function<float()> f_Z1LeptonsMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsMass", f_Z1LeptonsMass, "all");
+  std::function<float()> f_ZLeptonsMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsMass", f_ZLeptonsMass, "all");
   // pt
-  std::function<float()> f_Z1LeptonsPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsPt", f_Z1LeptonsPt, "all");
+  std::function<float()> f_ZLeptonsPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsPt", f_ZLeptonsPt, "all");
   // eta
-  std::function<float()> f_Z1LeptonsEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsEta", f_Z1LeptonsEta, "all");
+  std::function<float()> f_ZLeptonsEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsEta", f_ZLeptonsEta, "all");
   // phi
-  std::function<float()> f_Z1LeptonsPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsPhi", f_Z1LeptonsPhi, "all");
+  std::function<float()> f_ZLeptonsPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsPhi", f_ZLeptonsPhi, "all");
   // deltaR
-  std::function<float()> f_Z1LeptonsDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsDeltaR", f_Z1LeptonsDeltaR, "all");
+  std::function<float()> f_ZLeptonsDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsDeltaR", f_ZLeptonsDeltaR, "all");
   // deltaEta
-  std::function<float()> f_Z1LeptonsDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsDeltaEta", f_Z1LeptonsDeltaEta, "all");
+  std::function<float()> f_ZLeptonsDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsDeltaEta", f_ZLeptonsDeltaEta, "all");
   // deltaPhi
-  std::function<float()> f_Z1LeptonsDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "leptons_Z1");
-  core()->AddTreeBranch("Z1LeptonsDeltaPhi", f_Z1LeptonsDeltaPhi, "all");
+  std::function<float()> f_ZLeptonsDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "leptons_Z");
+  core()->AddTreeBranch("ZLeptonsDeltaPhi", f_ZLeptonsDeltaPhi, "all");
 
-  // Z2 leptons kinematics
+  // Z quarks kinematics
   // mass
-  std::function<float()> f_Z2LeptonsMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsMass", f_Z2LeptonsMass, "all");
+  std::function<float()> f_ZQuarksMass = std::bind(&TruthOutputModule::getMassBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksMass", f_ZQuarksMass, "all");
   // pt
-  std::function<float()> f_Z2LeptonsPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsPt", f_Z2LeptonsPt, "all");
+  std::function<float()> f_ZQuarksPt = std::bind(&TruthOutputModule::getPtBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksPt", f_ZQuarksPt, "all");
   // eta
-  std::function<float()> f_Z2LeptonsEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsEta", f_Z2LeptonsEta, "all");
+  std::function<float()> f_ZQuarksEta = std::bind(&TruthOutputModule::getEtaBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksEta", f_ZQuarksEta, "all");
   // phi
-  std::function<float()> f_Z2LeptonsPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsPhi", f_Z2LeptonsPhi, "all");
+  std::function<float()> f_ZQuarksPhi = std::bind(&TruthOutputModule::getPhiBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksPhi", f_ZQuarksPhi, "all");
   // deltaR
-  std::function<float()> f_Z2LeptonsDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsDeltaR", f_Z2LeptonsDeltaR, "all");
+  std::function<float()> f_ZQuarksDeltaR = std::bind(&TruthOutputModule::getDeltaRBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksDeltaR", f_ZQuarksDeltaR, "all");
   // deltaEta
-  std::function<float()> f_Z2LeptonsDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsDeltaEta", f_Z2LeptonsDeltaEta, "all");
+  std::function<float()> f_ZQuarksDeltaEta = std::bind(&TruthOutputModule::getDeltaEtaBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksDeltaEta", f_ZQuarksDeltaEta, "all");
   // deltaPhi
-  std::function<float()> f_Z2LeptonsDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "leptons_Z2");
-  core()->AddTreeBranch("Z2LeptonsDeltaPhi", f_Z2LeptonsDeltaPhi, "all");
+  std::function<float()> f_ZQuarksDeltaPhi = std::bind(&TruthOutputModule::getDeltaPhiBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarksDeltaPhi", f_ZQuarksDeltaPhi, "all");
+
+  // pt
+  std::function<std::vector<float>()> f_ZQuarkPt = std::bind(&TruthOutputModule::getPtVectorBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarkPt", f_ZQuarkPt, "all");
+  // eta
+  std::function<std::vector<float>()> f_ZQuarkEta = std::bind(&TruthOutputModule::getEtaVectorBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarkEta", f_ZQuarkEta, "all");
+  // phi
+  std::function<std::vector<float>()> f_ZQuarkPhi = std::bind(&TruthOutputModule::getPhiVectorBQuarks, this, "kZBosons", "quarks_Z");
+  core()->AddTreeBranch("ZQuarkPhi", f_ZQuarkPhi, "all");
 }
 
 
@@ -562,13 +572,10 @@ std::vector<const xAOD::TruthParticle*> TruthOutputModule::getBQuarks(const std:
     }
   }
 
-  if(target == "leptons_Z1"){
-    int Z_index = 0;
+  if(target == "leptons_Z"){
     std::cout<<__LINE__<<std::endl;
     for(auto par : *pars){
       if(par->pdgId() != 23) continue;
-      Z_index++;
-      std::cout<<"Z_index: "<<Z_index<<std::endl;
       for(int i = 0; i < par->nChildren(); i++){
         int id = par->child(i)->absPdgId();
       std::cout<<"Z i th, child: "<<i<<", "<<id<<std::endl;
@@ -576,23 +583,18 @@ std::vector<const xAOD::TruthParticle*> TruthOutputModule::getBQuarks(const std:
           bottoms.push_back(this->loopSelf(par->child(i)));
         }
       }
-      if(Z_index == 1) break;
     }
   }
 
-  if(target == "leptons_Z2"){
-    int Z_index = 0;
+  if(target == "quarks_Z"){
     for(auto par : *pars){
       if(par->pdgId() != 23) continue;
-      Z_index++;
-      if(Z_index != 2) continue;
       for(int i = 0; i < par->nChildren(); i++){
         int id = par->child(i)->absPdgId();
-        if(id == 11 || id == 13 || id == 15){
+        if(0 < id && id < 6){
           bottoms.push_back(this->loopSelf(par->child(i)));
         }
       }
-      if(Z_index == 2) break;
     }
   }
 
