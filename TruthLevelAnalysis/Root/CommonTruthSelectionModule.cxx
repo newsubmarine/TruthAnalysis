@@ -34,7 +34,7 @@ void CommonTruthSelectionModule::initialize (){
   core()->addTemplate("PID_SEL", &CommonTruthSelectionModule::pidSel, this);
   core()->addTemplate("SIM_EFF", &CommonTruthSelectionModule::simEff, this);
   core()->addTemplate("ISOLEP_SEL", &CommonTruthSelectionModule::isoLepSel, this);
-//  core()->addTemplate("BQuark_SEL", &CommonTruthSelectionModule::bQuarkSel, this);
+  core()->addTemplate("BQuark_SEL", &CommonTruthSelectionModule::bQuarkSel, this);
   core()->addTemplate("TAU_SEL", &CommonTruthSelectionModule::tauSel, this);
   core()->addTemplate("ELE_SEL", &CommonTruthSelectionModule::eleSel, this);
   core()->addTemplate("MUON_SEL", &CommonTruthSelectionModule::muonSel, this);
@@ -366,7 +366,7 @@ bool CommonTruthSelectionModule::pidSel(xAOD::TruthParticle* par, int absPdgId)
   //          << "pt:" << par->pt() << "\t" 
             //<< "ndau:" << par->nChildren() << "\t" << par->child(0)->absPdgId() << std::endl;
   //          << "ndau:" << par->nChildren()  << std::endl;
-  if (0==par->nChildren()) return true;
+  if (0==par->nChildren()) return true; // notice this
   for (unsigned int i=0; i<par->nChildren(); ++i) {
     int childPdgId = par->child(i)->absPdgId();
     if (absPdgId==childPdgId) return false; // loop self chain
@@ -537,16 +537,17 @@ bool CommonTruthSelectionModule::muonSel(xAOD::TruthParticle* muon, double pTcut
 //_____________________________________________________________________________
 
 bool CommonTruthSelectionModule::bQuarkSel(xAOD::TruthParticle* b_quark){
-  std::cout<<__LINE__<<std::endl;
   if(b_quark->absPdgId() != 5) return false;
-  std::cout<<__LINE__<<std::endl;
-  if(b_quark->child(0)->pdgId() == b_quark->pdgId()) return false;
-  std::cout<<__LINE__<<std::endl;
-  if(! b_quark->parent(0)) throw Exception("can not fetch b parent");
-  //if(! b_quark->parent(0)) std::cout<<"can not fetch b parent"<<std::endl;
-  const xAOD::TruthParticle* par = b_quark;
-  while(par->parent(0)->pdgId()==par->pdgId()) {par=par->parent(0);}
-  if(par->parent(0)->pdgId() != 23) return false;
+  //if(b_quark->parent(0)) {
+  //  const xAOD::TruthParticle* tmp = b_quark;
+  //  while(tmp->parent(0)&&tmp->parent(0)->pdgId()==tmp->pdgId()){
+  //    tmp = tmp->parent(0);
+  //  }
+  //  std::cout<<"b quark parent: "<<tmp->parent(0)->pdgId()<<std::endl;
+  //  if(tmp->parent(0)->pdgId()!=25&&tmp->parent(0)->pdgId()!=23) return false;
+  //}
+  if(b_quark->child(0) && b_quark->child(0)->pdgId() == b_quark->pdgId()) return false;
+  if(std::abs(b_quark->eta())>2.5) return false;
   return true;
 }
 
