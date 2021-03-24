@@ -6,7 +6,7 @@
 #python run.py 4l_10 --regionFile regions_container.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
 #python run.py bbZZ4l_01 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
 #python run.py bbZZ4l_10 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
-python run.py bbZZ4l_05 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
-python run.py bbZZ4l_20 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
-#python run.py bbZZ2l2q_01 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
-#python run.py bbZZ2l2q_10 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
+#python run.py bbZZ4l_05 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
+#python run.py bbZZ4l_20 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
+python run.py bbZZ2l2q_01 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
+python run.py bbZZ2l2q_10 --regionFile regions_bbZZ4l.yaml --modConf module_config.yaml --sampleDir inputs  --maxEvents 1000000 2>&1  | tee l4.log
