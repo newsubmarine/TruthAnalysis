@@ -16,6 +16,12 @@
 void TruthOutputModule::initialize (){
 
   // Basic event infomation
+  std::function<int()> f_nHiggs = std::bind(&TruthOutputModule::getParNum, this, "kHiggs");
+  core()->AddTreeBranch("nHiggs", f_nHiggs, "all");
+  std::function<int()> f_nZBosons = std::bind(&TruthOutputModule::getParNum, this, "kZBosons");
+  core()->AddTreeBranch("nZBosons", f_nZBosons, "all");
+  std::function<int()> f_nBQuarks = std::bind(&TruthOutputModule::getParNum, this, "kBQuarks");
+  core()->AddTreeBranch("nBQuarks", f_nBQuarks, "all");
   std::function<int()> f_nTausH = std::bind(&TruthOutputModule::getParNum, this, "kTausH");
   core()->AddTreeBranch("nTausH", f_nTausH, "all");
   std::function<int()> f_nEles = std::bind(&TruthOutputModule::getParNum, this, "kElectrons");
