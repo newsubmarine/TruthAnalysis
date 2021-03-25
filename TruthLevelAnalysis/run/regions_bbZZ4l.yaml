@@ -7,13 +7,14 @@ PreSelection:
     - $FETCH_TRUTH_PARTICLES : [TruthTaus, kTausH]
     - $FETCH_TRUTH_PARTICLES : [TruthParticles, kHiggs]
     - $FETCH_TRUTH_PARTICLES : [TruthParticles, kZBosons]
-#    - $FETCH_TRUTH_PARTICLES : [TruthBottom, kBQuarks]
+    - $FETCH_TRUTH_PARTICLES : [TruthParticles, kBQuarks]
     - $FETCH_JETS: [AntiKt4TruthDressedWZJets, kJets]
     - $FETCH_JETS: [AntiKt4TruthDressedWZJets, kVBFJets]
 #    - $FETCH_JETS: [AntiKt4TruthDressedWZJets, kBJets]
 
     - $PID_SEL : [kHiggs, 25]
     - $PID_SEL : [kZBosons, 23]
+    - $PID_SEL : [kBQuarks, 5]
 
     - $ELE_SEL : [kElectrons, -1, -1]
     - $MUON_SEL : [kMuons, -1, -1]
