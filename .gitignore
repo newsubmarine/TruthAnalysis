@@ -1,0 +1,11 @@
+.asetup.save
+CMakeLists.txt
+!TruthLevelAnalysis/CMakeLists.txt
+ELCore
+PlottingTools
+*.pyc
+*.root
+*.png
+*.log
+TruthLevelAnalysis/run/output*
+TruthLevelAnalysis/run/inputs
